@@ -20,7 +20,7 @@ function App() {
       if (result.success) setHabits(result.data);
       else setError(result.message);
     } catch (err) {
-      setError('Could not connect to the backend server.');
+      setError('Backend is waking up, please wait 30 seconds and try again...');
     } finally {
       setIsLoading(false);
     }
@@ -40,7 +40,7 @@ function App() {
         setHabits([result.data, ...habits]);
         setNewHabit('');
       }
-    } catch (err) { setError('Failed to add habit.'); }
+    } catch (err) { setError('Backend is waking up, please wait 30 seconds and try again...'); }
   };
 
   const handleComplete = async (id) => {
