@@ -8,8 +8,17 @@ const Habit = require('./models/Habit');
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL || '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
 app.use(express.json());
+
+// Health check route (required for Railway)
+app.get('/', (req, res) => {
+  res.json({ status: 'ok', message: 'HabitGuard API is running 🚀' });
+});
 
 // Database Connection
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/habitguard')
