@@ -83,7 +83,8 @@ app.get('/api/habits', async (req, res) => {
     });
     res.json({ success: true, data: enrichedHabits });
   } catch (error) {
-    res.status(500).json({ success: false, message: 'Server Error' });
+    console.error('GET /api/habits error:', error.message);
+    res.status(500).json({ success: false, message: 'Server Error', error: error.message });
   }
 });
 
